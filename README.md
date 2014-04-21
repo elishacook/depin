@@ -1,6 +1,16 @@
 # depin
 
-This is a very simple dependency injection library for javascript. Its flavor is a cross between [AngularJS](https://angularjs.org/) and [AMD](http://requirejs.org/docs/whyamd.html). It doesn't provide any script loading, just dependency resolution and injection. It looks like this:
+This is a very simple dependency injection library for javascript. Its flavor is a cross between [AngularJS](https://angularjs.org/) and [AMD](http://requirejs.org/docs/whyamd.html). It doesn't provide any script loading, just dependency resolution and injection.
+
+## Install
+
+Just grab the minified version from here or you can also use bower:
+
+```
+bower install depin
+```
+
+## It looks like this
 
 ```js
 depin
