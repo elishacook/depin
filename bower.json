@@ -1,0 +1,17 @@
+{
+  "name": "depin",
+  "main": "depin.js",
+  "version": "0.1.0",
+  "description": "Dependency injection",
+  "authors": [
+    "Elisha Fitch-Cook <elisha@elishacook.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
