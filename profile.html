@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <script src="depin.js"></script>
+    </head>
+    <body>
+        <script>
+        var ITERATIONS = 1000,
+            tests = {
+                'extract dependencies': function ()
+                {
+                    var deps = depin.extractDependencies(function (foo, bar, baz) {})
+                },
+                'extract empty dependencies': function ()
+                {
+                    var deps = depin.extractDependencies(function () {})
+                },
+                'define simple module': function ()
+                {
+                    depin.define('foo', function () {})
+                },
+                'define module with dependencies': function ()
+                {
+                    depin.define('foo', function () {})
+                    depin.define('bar', function () {})
+                    depin.define('baz', function (foo, bar) {})
+                },
+                'retrieve module': function ()
+                {
+                    depin.define('foo', function () {})
+                    var foo = depin.get('foo')
+                },
+                'injection into any function': function ()
+                {
+                    depin.define('foo', function () {})
+                    depin.run(function (foo) {})
+                }
+            }
+        
+        function repeat(N, fn)
+        {
+            for (var i=0; i<N; i++)
+            {
+                fn(i)
+                depin.clear()
+            }
+        }
+        
+        function runTests()
+        {
+            for (var n in tests)
+            {
+                repeat(ITERATIONS, tests[n])
+            }
+        }
+        
+        console.log('Running...')
+        console.profile("depin "+(new Date()))
+        runTests()
+        console.profileEnd()
+        </script>
+    </body>
+</html>
