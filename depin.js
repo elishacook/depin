@@ -32,13 +32,19 @@ window.depin =
         if (!m.isSetup)
         {
             m.isSetup = true
-            m.value = this.run(m.setup)
+            m.value = this.inject(m.setup)()
         }
         
         return m.value
     },
     
     run: function (fn)
+    {
+        this.inject(fn)()
+        return this
+    },
+    
+    inject: function (fn)
     {
         var deps = this.extractDependencies(fn)
         
@@ -52,14 +58,14 @@ window.depin =
                 }
                 return this.get(depName)
             }.bind(this))
-            return fn.apply(undefined, args)
+            
+            args.unshift(undefined)
+            return fn.bind.apply(fn, args)
         }
         else
         {
-            return fn()
+            return fn
         }
-        
-        return this
     },
     
     clear: function ()

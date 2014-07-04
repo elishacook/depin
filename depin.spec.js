@@ -53,7 +53,7 @@ describe("depin", function ()
         expect(flag).toEqual('bar')
     })
     
-    it("can inject dependencies into an abitrary function", function ()
+    it("can inject dependencies into an abitrary function and run it", function ()
     {
         depin
             .define("foo", function () { return 23 })
@@ -61,6 +61,21 @@ describe("depin", function ()
             {
                 expect(foo).toEqual(23)
             })
+            .run(function (foo)
+            {
+                expect(foo).toEqual(23)
+            })
+    })
+    
+    it("can inject into an arbitrary function retrning a new function", function ()
+    {
+        depin.define("foo", function () { return 23 })
+        
+        var fn = depin.inject(function (foo)
+        {
+            return foo
+        })
+        expect(fn()).toEqual(23)
     })
     
     it("will fail to load a module if it has a missing dependency", function ()
