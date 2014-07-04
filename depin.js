@@ -67,11 +67,6 @@ window.depin =
         this.modules = {}
     },
     
-    resolveDependencies: function ()
-    {
-        
-    },
-    
     extractDependencies: function (fn)
     {
         var args = this.extractArguments(fn)
