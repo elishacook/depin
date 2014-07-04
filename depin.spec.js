@@ -103,4 +103,19 @@ describe("depin", function ()
             depin.define("foo", function (){})
         }).toThrow("The module called 'foo' was already defined.")
     })
+    
+    it("delays resolving depenencies until required", function ()
+    {
+        var spy = jasmine.createSpy('dummy'),
+            fn = depin.inject(function (foo)
+        {
+            spy(foo)
+        })
+        
+        expect(spy).not.toHaveBeenCalled()
+        
+        depin.define('foo', function () { return 23 })
+        fn()
+        expect(spy).toHaveBeenCalledWith(23)
+    })
 })

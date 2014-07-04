@@ -50,17 +50,19 @@ window.depin =
         
         if (deps.length > 0)
         {
-            var args = deps.map(function (depName)
+            return function ()
             {
-                if (!this.modules[depName])
+                var args = deps.map(function (depName)
                 {
-                    throw new Error("No module called '"+depName+"' has been defined.")
-                }
-                return this.get(depName)
-            }.bind(this))
-            
-            args.unshift(undefined)
-            return fn.bind.apply(fn, args)
+                    if (!this.modules[depName])
+                    {
+                        throw new Error("No module called '"+depName+"' has been defined.")
+                    }
+                    return this.get(depName)
+                }.bind(this))
+                
+                return fn.apply(undefined, args)
+            }.bind(this)
         }
         else
         {
